@@ -19,34 +19,35 @@ class Scraper
     end
 
     def self.scrape_profile_page(profile_url)
-        binding.pry
+        # binding.pry
         profile = {}
-        # doc = Nokogiri::HTML(open(profile_url)).
-        # profile = {
-        # :twitter => doc.css(".social-icon-container a")[0].attribute("href").value,
-        # :linkedin => doc.css(".social-icon-container a")[1].attribute("href").value,
-        # :github => doc.css(".social-icon-container a")[2].attribute("href").value,
-        # :blog => doc.css(".social-icon-container a")[3].attribute("href").value,
-        # :profile_quote => doc.css("div.profile-quote").text,
-        # :bio => doc.css(".description-holder").css("p").text
-        # }
-        # profile
-        # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").attribute("href").value.include?("github")
-        # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map do |person|
-        #     person["href"].
-        # array = {}
-        links = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map {|link| link.attribute('href').value}.delete_if{|link| !link.include?("http")}
-        .each do|link|
-            if link.include?("twitter")
-                profile[:twitter] = link
-            elsif link.include?("linkedin")
-                linkedin =  link
-            elsif link.include?("github")
-                github =  link
-            elsif !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")
-                blog =  link
-            end
-        end
-        # array
+        doc = Nokogiri::HTML(open(profile_url)).
+        profile = {
+        :twitter => doc.css(".social-icon-container a").map{|link| link.attribute('href').value}.find{|link| link.include?("twitter")},
+        :linkedin => doc.css(".social-icon-container a").map{|link| link.attribute('href').value}.find{|link| link.include?("linkedin")},
+        :github => doc.css(".social-icon-container a").map{|link| link.attribute('href').value}.find{|link| link.include?("github")},
+        :blog => doc.css(".social-icon-container a").map{|link| link.attribute('href').value}.find{|link| !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")},
+        :profile_quote => doc.css("div.profile-quote").text,
+        :bio => doc.css(".description-holder").css("p").text
+        }
+        profile
+        # # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").attribute("href").value.include?("github")
+        # # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map do |person|
+        # #     person["href"].
+        # # array = {}
+        # links = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map{|link| link.attribute('href').value}.delete_if{|link| !link.include?("http")}
+        # .each do|link|
+        #     if link.include?("twitter")
+        #         profile[:twitter] = link
+        #     elsif link.include?("linkedin")
+        #         linkedin =  link
+        #     elsif link.include?("github")
+        #         github =  link
+        #     elsif !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")
+        #         blog =  link
+        #     end
+        # end
+        # # array
+        # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map{|link| link.attribute('href').value}.find{|link| link.include?("twitter")}
     end
 end
