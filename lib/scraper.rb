@@ -13,8 +13,8 @@ class Scraper
                 :location => eachperson.css("p").text,
                 :profile_url => eachperson.css("a").attribute("href").value
             }
+            array.push(person)
         end
-        array.push(person)
         array
     end
 
