@@ -19,7 +19,7 @@ class Scraper
     end
 
     def self.scrape_profile_page(profile_url)
-        # binding.pry
+        binding.pry
         profile = {}
         doc = Nokogiri::HTML(open(profile_url))
         profile = {
