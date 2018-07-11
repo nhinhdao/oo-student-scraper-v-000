@@ -31,24 +31,5 @@ class Scraper
         :bio => Nokogiri::HTML(open(profile_url)).css(".description-holder").css("p").text
         }
         profile.delete_if {|key, value| value == nil}
-        # binding.pry
-        # # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").attribute("href").value.include?("github")
-        # # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map do |person|
-        # #     person["href"].
-        # # array = {}
-        # links = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map{|link| link.attribute('href').value}.delete_if{|link| !link.include?("http")}
-        # .each do|link|
-        #     if link.include?("twitter")
-        #         profile[:twitter] = link
-        #     elsif link.include?("linkedin")
-        #         linkedin =  link
-        #     elsif link.include?("github")
-        #         github =  link
-        #     elsif !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")
-        #         blog =  link
-        #     end
-        # end
-        # # array
-        # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map{|link| link.attribute('href').value}.find{|link| link.include?("twitter")}
     end
 end
