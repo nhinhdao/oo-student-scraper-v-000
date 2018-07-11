@@ -8,9 +8,11 @@ class Student
         student_hash.each {|key, value| self.send("#{key}=","#{value}")}
         @@all << self
     end
-
+    [{:name => "Abby Smith", :location => "Brooklyn, NY", :profile_url => "students/abby-smith.html"}]
     def self.create_from_collection(students_array)
-        # self.new
+        student = self.new
+        students_array.each {|std| std.each {|key, value| student.send("#{key}=","#{value}")}}
+        @@all << student
     end
 
     def add_student_attributes(attributes_hash)
