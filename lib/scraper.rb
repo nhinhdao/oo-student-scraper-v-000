@@ -48,6 +48,5 @@ class Scraper
             end
         end
         # array
-        end
     end
 end
