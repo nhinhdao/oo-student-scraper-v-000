@@ -19,7 +19,7 @@ class Scraper
     end
 
     def self.scrape_profile_page(profile_url)
-        # binding.pry
+        binding.pry
         profile = {}
         # doc = Nokogiri::HTML(open(profile_url)).
         # profile = {
@@ -37,12 +37,11 @@ class Scraper
         # array = {}
         link = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a")
         links.map {|link| link.attribute('href').value}.drop_while{|link| !link.include?("https")}.each do|link|
-            array = {
-            :twitter => link if link.include?("twitter"),
-            :linkedin =>  link if link.include?("linkedin"),
-            :github =>  link if link.include?("github"),
-            :blog =>  link if !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")
-        }
+            twitter = link if link.include?("twitter"),
+            linkedin =  link if link.include?("linkedin"),
+            github =  link if link.include?("github"),
+            blog =  link if !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")
+        end
         array
         end
     end
