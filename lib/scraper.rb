@@ -35,10 +35,10 @@ class Scraper
         # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map do |person|
         #     person["href"].
         # array = {}
-        links = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a")
-        links.map {|link| link.attribute('href').value}.drop_while{|link| !link.include?("https")}.each do|link|
+        links = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map {|link| link.attribute('href').value}.delete_if{|link| !link.include?("http")}
+        .each do|link|
             if link.include?("twitter")
-                twitter = link
+                profile[:twitter] = link
             elsif link.include?("linkedin")
                 linkedin =  link
             elsif link.include?("github")
