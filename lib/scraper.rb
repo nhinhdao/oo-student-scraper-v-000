@@ -38,16 +38,16 @@ class Scraper
         link = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a")
         links.map {|link| link.attribute('href').value}.drop_while{|link| !link.include?("https")}.each do|link|
             if link.include?("twitter")
-                twitter = link 
+                twitter = link
             elsif link.include?("linkedin")
-                linkedin =  link 
+                linkedin =  link
             elsif link.include?("github")
-                github =  link 
+                github =  link
             elsif !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")
-                blog =  link 
+                blog =  link
             end
         end
-        array
+        # array
         end
     end
 end
