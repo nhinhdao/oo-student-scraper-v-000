@@ -19,21 +19,31 @@ class Scraper
     end
 
     def self.scrape_profile_page(profile_url)
-        binding.pry
+        # binding.pry
         profile = {}
-        doc = Nokogiri::HTML(open(profile_url)).css(".main-wrapper")
-        profile = {
-        :twitter => doc.css(".social-icon-container a")[0].attribute("href").value,
-        :linkedin => doc.css(".social-icon-container a")[1].attribute("href").value,
-        :github => doc.css(".social-icon-container a")[2].attribute("href").value,
-        :blog => doc.css(".social-icon-container a")[3].attribute("href").value,
-        :profile_quote => doc.css("div.profile-quote").text,
-        :bio => doc.css(".description-holder").css("p").text
+        # doc = Nokogiri::HTML(open(profile_url)).
+        # profile = {
+        # :twitter => doc.css(".social-icon-container a")[0].attribute("href").value,
+        # :linkedin => doc.css(".social-icon-container a")[1].attribute("href").value,
+        # :github => doc.css(".social-icon-container a")[2].attribute("href").value,
+        # :blog => doc.css(".social-icon-container a")[3].attribute("href").value,
+        # :profile_quote => doc.css("div.profile-quote").text,
+        # :bio => doc.css(".description-holder").css("p").text
+        # }
+        # profile
+        # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").attribute("href").value.include?("github")
+        # Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").map do |person|
+        #     person["href"].
+        # array = {} 
+        link = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a")
+        links.map {|link| link.attribute('href').value}.drop_while{|link| !link.include?("https")}.each do|link| 
+            array = {
+            :twitter => link if link.include?("twitter"),
+            :linkedin =>  link if link.include?("linkedin"),
+            :github =>  link if link.include?("github"),
+            :blog =>  link if !link.include?("twitter") && !link.include?("github") && !link.include?("linkedin")
         }
-        profile
-        body > div > div.details-container > div.bio-block.details-block > div > div.description-holder > p
-        body > div > div.vitals-container > div.social-icon-container > a:nth-child(2)
-        body > div > header
-        Nokogiri::HTML(open(profile_url)).css(".social-icon-container a").attribute("href").value.include?("github")
+        array
+        end
     end
 end
